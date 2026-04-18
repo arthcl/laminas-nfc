@@ -26,7 +26,7 @@ interface EntrepreneurData {
 
 export default function EntrepreneurCard({ data }: { data: EntrepreneurData }) {
   return (
-    <div className="min-h-svh bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-svh bg-gray-50 flex items-start justify-center p-4 py-8">
       <div className="bg-white rounded-3xl shadow-xl max-w-sm w-full overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-br from-purple-600 to-fuchsia-600 px-6 pt-10 pb-8 text-center">

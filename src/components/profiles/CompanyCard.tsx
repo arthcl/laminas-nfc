@@ -25,7 +25,7 @@ interface CompanyData {
 
 export default function CompanyCard({ data }: { data: CompanyData }) {
   return (
-    <div className="min-h-svh bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-svh bg-gray-50 flex items-start justify-center p-4 py-8">
       <div className="bg-white rounded-3xl shadow-xl max-w-sm w-full overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-br from-indigo-600 to-violet-700 px-6 pt-10 pb-8 text-center">

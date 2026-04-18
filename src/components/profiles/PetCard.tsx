@@ -23,10 +23,10 @@ export default function PetCard({ data }: { data: PetData }) {
   const cfg = petConfig[data.petType];
 
   return (
-    <div className="min-h-svh bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-svh bg-gray-50 flex items-start justify-center p-4 py-8">
       <div className="bg-white rounded-3xl shadow-xl max-w-sm w-full overflow-hidden">
         {/* Header con gradiente */}
-        <div className={`bg-gradient-to-br ${cfg.gradient} px-6 pt-10 pb-14 text-center relative`}>
+        <div className={`bg-gradient-to-br ${cfg.gradient} px-6 pt-10 pb-8 text-center`}>
           {data.photoUrl ? (
             <div className="inline-block rounded-full border-4 border-white shadow-lg overflow-hidden w-24 h-24 mx-auto">
               <Image src={data.photoUrl} alt={data.petName} width={96} height={96} className="object-cover w-full h-full" />
@@ -43,8 +43,8 @@ export default function PetCard({ data }: { data: PetData }) {
         </div>
 
         {/* Contenido */}
-        <div className="px-6 pb-6 -mt-6">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 divide-y divide-gray-50">
+        <div className="px-6 pb-6 pt-4">
+          <div className="divide-y divide-gray-100">
             <div className="flex items-center justify-between px-4 py-3">
               <span className="text-xs text-gray-500 font-medium">Dueño</span>
               <span className="text-sm font-semibold text-gray-900">{data.ownerName}</span>
