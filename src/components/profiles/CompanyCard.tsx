@@ -1,7 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { Globe, Instagram, Phone } from "lucide-react";
+import { Globe, Phone } from "lucide-react";
+
+function InstagramIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+    </svg>
+  );
+}
 
 interface CompanyData {
   companyName: string;
@@ -41,7 +51,7 @@ export default function CompanyCard({ data }: { data: CompanyData }) {
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-3 rounded-xl bg-pink-50 hover:bg-pink-100 transition"
           >
-            <Instagram className="text-pink-500" size={20} />
+            <span className="text-pink-500"><InstagramIcon /></span>
             <span className="text-sm font-medium">Instagram</span>
           </a>
         )}
