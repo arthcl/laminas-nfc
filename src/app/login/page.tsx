@@ -25,7 +25,12 @@ export default function LoginPage() {
       setError("Email o contraseña incorrectos.");
       setLoading(false);
     } else {
-      router.push("/admin/dashboard");
+      const data = await res?.ok ? null : null;
+      // Fetch session to get role
+      const sessionRes = await fetch("/api/auth/session");
+      const sessionData = await sessionRes.json();
+      const role = sessionData?.user?.role;
+      router.push(role === "ADMIN" ? "/admin/dashboard" : "/portal");
       router.refresh();
     }
   }
