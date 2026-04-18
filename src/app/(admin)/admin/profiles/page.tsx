@@ -1,10 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import type { Prisma } from "@prisma/client";
-
-type ProfileWithDetails = Prisma.ProfileGetPayload<{
-  include: { pet: true; company: true; entrepreneur: true; user: true };
-}>;
 
 export default async function ProfilesPage() {
   const profiles = await prisma.profile.findMany({
@@ -16,7 +11,7 @@ export default async function ProfilesPage() {
     <div className="space-y-4">
       <h2 className="text-2xl font-bold">Perfiles</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {profiles.map((p: ProfileWithDetails) => {
+        {profiles.map((p) => {
           const label =
             p.type === "PET"
               ? p.pet?.petName
