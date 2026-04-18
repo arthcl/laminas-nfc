@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import UserSelect from "@/components/forms/UserSelect";
 
 interface User { id: string; name: string | null; email: string; }
@@ -17,7 +18,8 @@ export default function PetForm({ users }: { users: User[] }) {
     setError("");
 
     const form = e.currentTarget;
-    const get = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value;
+    const get = (name: string) =>
+      (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value;
 
     const res = await fetch("/api/profiles", {
       method: "POST",
@@ -37,7 +39,7 @@ export default function PetForm({ users }: { users: User[] }) {
 
     if (!res.ok) {
       const json = await res.json();
-      setError(json.error ?? "Error al crear perfil");
+      setError(typeof json.error === "string" ? json.error : "Error al crear perfil");
       setLoading(false);
       return;
     }
@@ -47,54 +49,78 @@ export default function PetForm({ users }: { users: User[] }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-6 space-y-4">
-      <UserSelect users={users} />
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Sección: asignación */}
+      <div className="card p-6 space-y-4">
+        <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Asignación</h2>
+        <UserSelect users={users} />
+      </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de la mascota *</label>
-          <input name="petName" required className="input" />
+      {/* Sección: mascota */}
+      <div className="card p-6 space-y-4">
+        <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Datos de la mascota</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="label">Nombre *</label>
+            <input name="petName" required placeholder="Firulais" className="input" />
+          </div>
+          <div>
+            <label className="label">Tipo *</label>
+            <select name="petType" required className="input">
+              <option value="DOG">🐶 Perro</option>
+              <option value="CAT">🐱 Gato</option>
+              <option value="OTHER">🐾 Otro</option>
+            </select>
+          </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Tipo *</label>
-          <select name="petType" required className="input">
-            <option value="DOG">Perro 🐶</option>
-            <option value="CAT">Gato 🐱</option>
-            <option value="OTHER">Otro 🐾</option>
-          </select>
+          <label className="label">URL foto de la mascota</label>
+          <input name="photoUrl" type="url" placeholder="https://..." className="input" />
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Nombre del dueño *</label>
-        <input name="ownerName" required className="input" />
+      {/* Sección: dueño */}
+      <div className="card p-6 space-y-4">
+        <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Datos del dueño</h2>
+        <div>
+          <label className="label">Nombre del dueño *</label>
+          <input name="ownerName" required placeholder="Juan Pérez" className="input" />
+        </div>
+        <div>
+          <label className="label">Contacto *</label>
+          <input name="ownerContact" required placeholder="+56 9 1234 5678" className="input" />
+        </div>
+        <div>
+          <label className="label">Dirección</label>
+          <input name="address" placeholder="Av. Ejemplo 123, Santiago" className="input" />
+        </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Contacto del dueño *</label>
-        <input name="ownerContact" required placeholder="+56 9 1234 5678" className="input" />
+      {/* Sección: médica */}
+      <div className="card p-6 space-y-4">
+        <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Información médica</h2>
+        <div>
+          <label className="label">Notas médicas</label>
+          <textarea
+            name="medicalInfo"
+            rows={4}
+            placeholder="Alergias, medicamentos, condiciones especiales, veterinario..."
+            className="input resize-none"
+          />
+        </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-        <input name="address" className="input" />
-      </div>
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-2.5">
+          {error}
+        </div>
+      )}
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Información médica</label>
-        <textarea name="medicalInfo" rows={3} placeholder="Alergias, medicamentos, condiciones especiales..." className="input resize-none" />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">URL foto de la mascota</label>
-        <input name="photoUrl" type="url" placeholder="https://..." className="input" />
-      </div>
-
-      {error && <p className="text-sm text-red-500">{error}</p>}
-
-      <div className="flex gap-3 pt-2">
-        <button type="button" onClick={() => router.back()} className="btn-secondary">Cancelar</button>
-        <button type="submit" disabled={loading} className="btn-primary">{loading ? "Creando..." : "Crear perfil"}</button>
+      <div className="flex gap-3">
+        <Link href="/admin/new" className="btn-secondary flex-1 text-center">Cancelar</Link>
+        <button type="submit" disabled={loading} className="btn-primary flex-1">
+          {loading ? "Creando..." : "Crear perfil"}
+        </button>
       </div>
     </form>
   );

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function NewUserPage() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function NewUserPage() {
 
     if (!res.ok) {
       const json = await res.json();
-      setError(json.error ?? "Error al crear usuario");
+      setError(typeof json.error === "string" ? json.error : "Error al crear usuario");
       setLoading(false);
       return;
     }
@@ -39,63 +40,50 @@ export default function NewUserPage() {
   }
 
   return (
-    <div className="max-w-md space-y-6">
-      <h2 className="text-2xl font-bold">Nuevo usuario</h2>
-      <div className="bg-white rounded-2xl shadow-sm p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="space-y-6 max-w-lg">
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <Link href="/admin/users" className="text-gray-400 hover:text-gray-700 transition text-sm">← Usuarios</Link>
+      </div>
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">Nuevo usuario</h1>
+        <p className="text-sm text-gray-500 mt-0.5">Completa los datos para crear la cuenta.</p>
+      </div>
+
+      <div className="card p-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-            <input
-              name="name"
-              type="text"
-              required
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <label className="label">Nombre completo</label>
+            <input name="name" type="text" required placeholder="Juan Pérez" className="input" />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              name="email"
-              type="email"
-              required
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <label className="label">Email</label>
+            <input name="email" type="email" required placeholder="juan@ejemplo.cl" className="input" />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-            <input
-              name="password"
-              type="password"
-              required
-              minLength={8}
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <p className="text-xs text-gray-400 mt-1">Mínimo 8 caracteres</p>
+            <label className="label">Contraseña</label>
+            <input name="password" type="password" required minLength={8} placeholder="Mínimo 8 caracteres" className="input" />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
-            <select
-              name="role"
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="CLIENT">Cliente</option>
-              <option value="ADMIN">Admin</option>
+            <label className="label">Rol</label>
+            <select name="role" className="input">
+              <option value="CLIENT">Cliente — acceso solo a su perfil</option>
+              <option value="ADMIN">Admin — acceso completo al panel</option>
             </select>
           </div>
-          {error && <p className="text-sm text-red-500">{error}</p>}
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-2.5">
+              {error}
+            </div>
+          )}
+
           <div className="flex gap-3 pt-2">
-            <button
-              type="button"
-              onClick={() => router.back()}
-              className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex-1 bg-blue-600 text-white py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition disabled:opacity-50"
-            >
+            <Link href="/admin/users" className="btn-secondary flex-1 text-center">Cancelar</Link>
+            <button type="submit" disabled={loading} className="btn-primary flex-1">
               {loading ? "Creando..." : "Crear usuario"}
             </button>
           </div>

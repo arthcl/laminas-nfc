@@ -8,49 +8,62 @@ export default async function UsersPage() {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Usuarios</h2>
-        <Link
-          href="/admin/users/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition"
-        >
-          + Nuevo usuario
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Usuarios</h1>
+          <p className="text-sm text-gray-500 mt-0.5">{users.length} usuario{users.length !== 1 ? "s" : ""} registrado{users.length !== 1 ? "s" : ""}</p>
+        </div>
+        <Link href="/admin/users/new" className="btn-primary">
+          <span>+</span> Nuevo usuario
         </Link>
       </div>
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
-            <tr>
-              <th className="px-4 py-3 text-left">Nombre</th>
-              <th className="px-4 py-3 text-left">Email</th>
-              <th className="px-4 py-3 text-left">Rol</th>
-              <th className="px-4 py-3 text-left">Creado</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {users.map((u) => (
-              <tr key={u.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 font-medium">{u.name}</td>
-                <td className="px-4 py-3 text-gray-500">{u.email}</td>
-                <td className="px-4 py-3">
-                  <span
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                      u.role === "ADMIN"
-                        ? "bg-purple-100 text-purple-700"
-                        : "bg-blue-100 text-blue-700"
-                    }`}
-                  >
-                    {u.role}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-gray-400">
-                  {new Date(u.createdAt).toLocaleDateString("es-CL")}
-                </td>
+
+      {/* Table */}
+      <div className="card overflow-hidden">
+        {users.length === 0 ? (
+          <div className="p-16 flex flex-col items-center text-center gap-3">
+            <span className="text-4xl">👤</span>
+            <p className="font-semibold text-gray-900">Sin usuarios aún</p>
+            <Link href="/admin/users/new" className="btn-primary mt-1">Crear usuario</Link>
+          </div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-gray-50 border-b border-gray-100">
+                <th className="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Usuario</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">Rol</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Registrado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {users.map((u) => (
+                <tr key={u.id} className="hover:bg-gray-50 transition">
+                  <td className="px-5 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 text-xs font-bold shrink-0">
+                        {u.name?.charAt(0).toUpperCase() ?? u.email.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium text-gray-900 truncate">{u.name}</p>
+                        <p className="text-xs text-gray-400 truncate">{u.email}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-5 py-4 hidden sm:table-cell">
+                    <span className={u.role === "ADMIN" ? "badge-indigo" : "badge-gray"}>
+                      {u.role === "ADMIN" ? "Admin" : "Cliente"}
+                    </span>
+                  </td>
+                  <td className="px-5 py-4 text-gray-400 text-xs hidden md:table-cell">
+                    {new Date(u.createdAt).toLocaleDateString("es-CL", { day: "2-digit", month: "short", year: "numeric" })}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

@@ -17,16 +17,10 @@ export default async function ProfilePage({ params }: Props) {
   if (!profile) notFound();
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      {profile.type === "PET" && profile.pet && (
-        <PetCard data={profile.pet} />
-      )}
-      {profile.type === "COMPANY" && profile.company && (
-        <CompanyCard data={profile.company} />
-      )}
-      {profile.type === "ENTREPRENEUR" && profile.entrepreneur && (
-        <EntrepreneurCard data={profile.entrepreneur} />
-      )}
-    </main>
+    <>
+      {profile.type === "PET" && profile.pet && <PetCard data={profile.pet} />}
+      {profile.type === "COMPANY" && profile.company && <CompanyCard data={profile.company} />}
+      {profile.type === "ENTREPRENEUR" && profile.entrepreneur && <EntrepreneurCard data={profile.entrepreneur} />}
+    </>
   );
 }
