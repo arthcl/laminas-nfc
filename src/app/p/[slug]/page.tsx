@@ -5,12 +5,14 @@ import CompanyCard from "@/components/profiles/CompanyCard";
 import EntrepreneurCard from "@/components/profiles/EntrepreneurCard";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ProfilePage({ params }: Props) {
+  const { slug } = await params;
+
   const profile = await prisma.profile.findUnique({
-    where: { slug: params.slug, active: true },
+    where: { slug, active: true },
     include: { pet: true, company: true, entrepreneur: true },
   });
 
