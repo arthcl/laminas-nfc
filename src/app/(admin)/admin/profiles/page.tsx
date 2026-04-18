@@ -1,12 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import type { Profile, PetProfile, CompanyProfile, EntrepreneurProfile } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 
-type ProfileWithDetails = Profile & {
-  pet: PetProfile | null;
-  company: CompanyProfile | null;
-  entrepreneur: EntrepreneurProfile | null;
-};
+type ProfileWithDetails = Prisma.ProfileGetPayload<{
+  include: { pet: true; company: true; entrepreneur: true; user: true };
+}>;
 
 export default async function ProfilesPage() {
   const profiles = await prisma.profile.findMany({
