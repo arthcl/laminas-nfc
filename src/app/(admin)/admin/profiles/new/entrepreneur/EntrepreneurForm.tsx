@@ -45,8 +45,8 @@ export default function EntrepreneurForm({ users }: { users: User[] }) {
       return;
     }
 
-    router.push("/admin/profiles");
-    router.refresh();
+    const profile = await res.json();
+    router.push(`/admin/profiles/${profile.id}/success`);
   }
 
   return (

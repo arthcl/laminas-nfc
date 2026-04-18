@@ -25,7 +25,7 @@ export default function LoginPage() {
       setError("Email o contraseña incorrectos.");
       setLoading(false);
     } else {
-      router.push("/admin/profiles");
+      router.push("/admin/dashboard");
       router.refresh();
     }
   }

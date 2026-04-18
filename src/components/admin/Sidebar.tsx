@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 const navItems = [
+  { href: "/admin/dashboard", label: "Dashboard", icon: "⊞" },
   { href: "/admin/profiles", label: "Perfiles", icon: "◈" },
   { href: "/admin/users", label: "Usuarios", icon: "◉" },
 ];
@@ -18,7 +19,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
       <aside className="hidden lg:flex flex-col w-60 min-h-screen bg-slate-900 fixed left-0 top-0 z-30">
         {/* Logo */}
         <div className="px-6 py-5 border-b border-slate-800">
-          <Link href="/admin/profiles" className="flex items-center gap-2.5">
+          <Link href="/admin/dashboard" className="flex items-center gap-2.5">
             <span className="text-xl">📡</span>
             <span className="font-bold text-white text-base">Láminas NFC</span>
           </Link>
@@ -76,7 +77,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
 
       {/* Mobile top bar */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-slate-900 px-4 py-3 flex items-center justify-between">
-        <Link href="/admin/profiles" className="flex items-center gap-2">
+        <Link href="/admin/dashboard" className="flex items-center gap-2">
           <span>📡</span>
           <span className="font-bold text-white text-sm">Láminas NFC</span>
         </Link>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  if (session && (session.user as any).role === "ADMIN") redirect("/admin/profiles");
+  if (session && (session.user as any).role === "ADMIN") redirect("/admin/dashboard");
 
   return (
     <main className="min-h-screen bg-white flex flex-col">

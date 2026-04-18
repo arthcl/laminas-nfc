@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import ToggleActive from "@/components/admin/ToggleActive";
 
 const typeConfig = {
   PET: { label: "Mascota", emoji: "🐾", badge: "badge-gray" },
@@ -76,13 +77,13 @@ export default async function ProfilesPage() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex gap-2 pt-1 border-t border-gray-50">
+                <div className="flex gap-1 pt-1 border-t border-gray-50">
                   <Link
                     href={`/p/${p.slug}`}
                     target="_blank"
                     className="flex-1 text-center text-xs font-medium text-indigo-600 hover:text-indigo-800 py-1.5 rounded-lg hover:bg-indigo-50 transition"
                   >
-                    Ver perfil ↗
+                    Ver ↗
                   </Link>
                   <Link
                     href={`/admin/profiles/${p.id}/edit`}
@@ -90,6 +91,7 @@ export default async function ProfilesPage() {
                   >
                     Editar
                   </Link>
+                  <ToggleActive profileId={p.id} active={p.active} />
                 </div>
               </div>
             );
