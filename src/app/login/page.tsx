@@ -78,7 +78,7 @@ export default function LoginPage() {
                 required
                 autoComplete="email"
                 placeholder="admin@ejemplo.cl"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
+                className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
               />
             </div>
 
@@ -90,7 +90,7 @@ export default function LoginPage() {
                 required
                 autoComplete="current-password"
                 placeholder="••••••••"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
+                className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
               />
             </div>
 
