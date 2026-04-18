@@ -23,7 +23,7 @@ export default function PetCard({ data }: { data: PetData }) {
   const cfg = petConfig[data.petType];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-svh bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-3xl shadow-xl max-w-sm w-full overflow-hidden">
         {/* Header con gradiente */}
         <div className={`bg-gradient-to-br ${cfg.gradient} px-6 pt-10 pb-14 text-center relative`}>
