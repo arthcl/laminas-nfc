@@ -28,7 +28,7 @@ export default function CompanyCard({ data }: { data: CompanyData }) {
     <div className="min-h-svh bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-3xl shadow-xl max-w-sm w-full overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-br from-indigo-600 to-violet-700 px-6 pt-10 pb-14 text-center">
+        <div className="bg-gradient-to-br from-indigo-600 to-violet-700 px-6 pt-10 pb-8 text-center">
           {data.logoUrl ? (
             <div className="inline-block rounded-2xl border-4 border-white/30 overflow-hidden w-20 h-20 mx-auto shadow-lg">
               <Image src={data.logoUrl} alt={data.companyName} width={80} height={80} className="object-cover w-full h-full" />
@@ -45,7 +45,7 @@ export default function CompanyCard({ data }: { data: CompanyData }) {
         </div>
 
         {/* Links */}
-        <div className="px-6 pb-6 -mt-6 space-y-3">
+        <div className="px-6 pb-6 pt-4 space-y-3">
           {data.instagramUrl && (
             <a
               href={data.instagramUrl}
