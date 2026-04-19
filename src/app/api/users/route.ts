@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { sendWelcomeEmail } from "@/lib/email";
 
 const createUserSchema = z.object({
   name: z.string().min(2),
@@ -39,6 +40,12 @@ export async function POST(req: NextRequest) {
     data: { name, email, password: hashed, role },
     select: { id: true, name: true, email: true, role: true, createdAt: true },
   });
+
+  try {
+    await sendWelcomeEmail({ name, email, password });
+  } catch (err) {
+    console.error("Error enviando email de bienvenida:", err);
+  }
 
   return NextResponse.json(user, { status: 201 });
 }
