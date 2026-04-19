@@ -27,7 +27,7 @@ export default async function EditProfilePage({ params }: Props) {
   const cfg = typeConfig[profile.type];
 
   return (
-    <div className="max-w-lg space-y-5">
+    <div className="max-w-lg mx-auto space-y-5">
       <Link href="/admin/profiles" className="text-gray-400 hover:text-gray-700 transition text-sm">
         ← Perfiles
       </Link>

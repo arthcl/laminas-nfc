@@ -113,7 +113,7 @@ export default function NewUserPage() {
   }
 
   return (
-    <div className="space-y-6 max-w-lg">
+    <div className="space-y-6 max-w-lg mx-auto">
       <div className="flex items-center gap-3">
         <Link href="/admin/users" className="text-gray-400 hover:text-gray-700 transition text-sm">← Usuarios</Link>
       </div>

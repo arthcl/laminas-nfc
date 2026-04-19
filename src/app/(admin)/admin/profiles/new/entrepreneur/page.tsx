@@ -9,7 +9,7 @@ export default async function NewEntrepreneurPage() {
   });
 
   return (
-    <div className="max-w-lg space-y-5">
+    <div className="max-w-lg mx-auto space-y-5">
       <Link href="/admin/new" className="text-gray-400 hover:text-gray-700 transition text-sm">← Tipo de perfil</Link>
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-2xl bg-purple-100 flex items-center justify-center text-2xl">🚀</div>

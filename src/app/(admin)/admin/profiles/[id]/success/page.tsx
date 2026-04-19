@@ -32,7 +32,7 @@ export default async function SuccessPage({ params }: Props) {
   const profileUrl = `${baseUrl}/p/${profile.slug}`;
 
   return (
-    <div className="max-w-lg space-y-6">
+    <div className="max-w-lg mx-auto space-y-6">
       {/* Éxito */}
       <div className="card p-8 text-center space-y-3">
         <div className="inline-flex w-16 h-16 rounded-full bg-emerald-100 items-center justify-center text-3xl mx-auto">

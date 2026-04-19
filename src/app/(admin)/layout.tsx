@@ -15,8 +15,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       {/* Desktop offset */}
       <div className="lg:pl-60">
         {/* Mobile top/bottom bar offsets */}
-        <div className="pt-14 pb-20 lg:pt-0 lg:pb-0">
-          <main className="p-6 max-w-6xl">{children}</main>
+        <div className="pt-16 pb-24 lg:pt-0 lg:pb-0">
+          <main className="p-6 lg:p-8 max-w-5xl mx-auto">{children}</main>
         </div>
       </div>
     </div>

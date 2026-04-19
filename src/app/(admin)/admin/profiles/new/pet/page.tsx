@@ -9,7 +9,7 @@ export default async function NewPetPage() {
   });
 
   return (
-    <div className="max-w-lg space-y-5">
+    <div className="max-w-lg mx-auto space-y-5">
       <div className="flex items-center gap-3">
         <Link href="/admin/new" className="text-gray-400 hover:text-gray-700 transition text-sm">← Tipo de perfil</Link>
       </div>
