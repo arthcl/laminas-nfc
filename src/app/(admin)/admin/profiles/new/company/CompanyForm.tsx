@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserSelect from "@/components/forms/UserSelect";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface User { id: string; name: string | null; email: string; }
 
@@ -65,10 +66,7 @@ export default function CompanyForm({ users }: { users: User[] }) {
           <label className="label">Descripción</label>
           <textarea name="description" rows={3} placeholder="Breve descripción de la empresa..." className="input resize-none" />
         </div>
-        <div>
-          <label className="label">URL del logo</label>
-          <input name="logoUrl" type="url" placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="logoUrl" label="Logo de la empresa" shape="square" />
       </div>
 
       <div className="card p-6 space-y-4">

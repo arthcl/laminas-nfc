@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface CompanyData {
   companyName: string; description?: string | null; instagramUrl?: string | null;
@@ -48,10 +49,7 @@ export default function CompanyEditForm({ profileId, data }: { profileId: string
           <label className="label">Descripción</label>
           <textarea name="description" rows={3} defaultValue={data.description ?? ""} className="input resize-none" />
         </div>
-        <div>
-          <label className="label">URL logo</label>
-          <input name="logoUrl" type="url" defaultValue={data.logoUrl ?? ""} placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="logoUrl" label="Logo de la empresa" defaultUrl={data.logoUrl} shape="square" />
       </div>
 
       <div className="card p-6 space-y-4">

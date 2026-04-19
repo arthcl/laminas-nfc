@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserSelect from "@/components/forms/UserSelect";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface User { id: string; name: string | null; email: string; }
 
@@ -62,10 +63,7 @@ export default function EntrepreneurForm({ users }: { users: User[] }) {
           <label className="label">Nombre *</label>
           <input name="name" required placeholder="María González" className="input" />
         </div>
-        <div>
-          <label className="label">URL foto de perfil</label>
-          <input name="photoUrl" type="url" placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="photoUrl" label="Foto de perfil" shape="circle" />
         <div>
           <label className="label">Dirección física</label>
           <input name="address" placeholder="Av. Ejemplo 123, Santiago" className="input" />

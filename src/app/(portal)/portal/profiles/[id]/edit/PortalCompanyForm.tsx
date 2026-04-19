@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface CompanyData {
   companyName: string; description?: string | null; instagramUrl?: string | null;
@@ -47,10 +48,7 @@ export default function PortalCompanyForm({ profileId, data }: { profileId: stri
           <label className="label">Descripción</label>
           <textarea name="description" rows={3} defaultValue={data.description ?? ""} className="input resize-none" />
         </div>
-        <div>
-          <label className="label">URL logo</label>
-          <input name="logoUrl" type="url" defaultValue={data.logoUrl ?? ""} placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="logoUrl" label="Logo de la empresa" defaultUrl={data.logoUrl} shape="square" />
       </div>
 
       <div className="card p-5 space-y-4">

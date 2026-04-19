@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserSelect from "@/components/forms/UserSelect";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface User { id: string; name: string | null; email: string; }
 
@@ -73,10 +74,7 @@ export default function PetForm({ users }: { users: User[] }) {
             </select>
           </div>
         </div>
-        <div>
-          <label className="label">URL foto de la mascota</label>
-          <input name="photoUrl" type="url" placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="photoUrl" label="Foto de la mascota" shape="circle" />
       </div>
 
       {/* Sección: dueño */}

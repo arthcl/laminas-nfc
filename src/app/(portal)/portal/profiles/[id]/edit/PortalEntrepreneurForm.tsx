@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface EntrepreneurData {
   name: string; whatsappUrl?: string | null; instagramUrl?: string | null;
@@ -44,10 +45,7 @@ export default function PortalEntrepreneurForm({ profileId, data }: { profileId:
           <label className="label">Nombre *</label>
           <input name="name" required defaultValue={data.name} className="input" />
         </div>
-        <div>
-          <label className="label">Foto de perfil (URL)</label>
-          <input name="photoUrl" type="url" defaultValue={data.photoUrl ?? ""} placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="photoUrl" label="Foto de perfil" defaultUrl={data.photoUrl} shape="circle" />
         <div>
           <label className="label">Dirección</label>
           <input name="address" defaultValue={data.address ?? ""} className="input" />

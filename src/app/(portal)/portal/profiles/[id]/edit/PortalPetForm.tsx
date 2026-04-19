@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PetType } from "@prisma/client";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface PetData {
   petName: string; petType: PetType; ownerName: string; ownerContact: string;
@@ -54,10 +55,7 @@ export default function PortalPetForm({ profileId, data }: { profileId: string; 
             </select>
           </div>
         </div>
-        <div>
-          <label className="label">URL foto</label>
-          <input name="photoUrl" type="url" defaultValue={data.photoUrl ?? ""} placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="photoUrl" label="Foto de la mascota" defaultUrl={data.photoUrl} shape="circle" />
       </div>
 
       <div className="card p-5 space-y-4">

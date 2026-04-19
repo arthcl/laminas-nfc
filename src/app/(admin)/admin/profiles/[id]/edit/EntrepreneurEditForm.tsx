@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import ImageUpload from "@/components/forms/ImageUpload";
 
 interface EntrepreneurData {
   name: string; whatsappUrl?: string | null; instagramUrl?: string | null;
@@ -45,10 +46,7 @@ export default function EntrepreneurEditForm({ profileId, data }: { profileId: s
           <label className="label">Nombre *</label>
           <input name="name" required defaultValue={data.name} className="input" />
         </div>
-        <div>
-          <label className="label">URL foto de perfil</label>
-          <input name="photoUrl" type="url" defaultValue={data.photoUrl ?? ""} placeholder="https://..." className="input" />
-        </div>
+        <ImageUpload name="photoUrl" label="Foto de perfil" defaultUrl={data.photoUrl} shape="circle" />
         <div>
           <label className="label">Dirección física</label>
           <input name="address" defaultValue={data.address ?? ""} className="input" />
