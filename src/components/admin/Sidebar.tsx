@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { LayoutDashboard, Layers, Users, Plus, LogOut } from "lucide-react";
 
 const navItems = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: "⊞" },
-  { href: "/admin/profiles", label: "Perfiles", icon: "◈" },
-  { href: "/admin/users", label: "Usuarios", icon: "◉" },
+  { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/profiles", label: "Perfiles", icon: Layers },
+  { href: "/admin/users", label: "Usuarios", icon: Users },
 ];
 
 export default function Sidebar({ userName }: { userName?: string | null }) {
@@ -29,6 +30,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
         <nav className="flex-1 px-3 py-4 space-y-1">
           {navItems.map((item) => {
             const active = pathname.startsWith(item.href);
+            const Icon = item.icon;
             return (
               <Link
                 key={item.href}
@@ -39,7 +41,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
                     : "text-slate-400 hover:text-white hover:bg-slate-800"
                 }`}
               >
-                <span className="text-base">{item.icon}</span>
+                <Icon size={17} />
                 {item.label}
               </Link>
             );
@@ -52,7 +54,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
             href="/admin/new"
             className="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-2.5 rounded-xl transition"
           >
-            <span className="text-base">+</span>
+            <Plus size={16} />
             Nuevo perfil
           </Link>
         </div>
@@ -67,10 +69,10 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
           </div>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="text-slate-500 hover:text-white text-xs transition ml-2 shrink-0"
+            className="text-slate-500 hover:text-white transition ml-2 shrink-0"
             title="Cerrar sesión"
           >
-            ⎋
+            <LogOut size={15} />
           </button>
         </div>
       </aside>
@@ -82,11 +84,11 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
           <span className="font-bold text-white text-sm">Láminas NFC</span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/admin/new" className="bg-indigo-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
-            + Nuevo
+          <Link href="/admin/new" className="bg-indigo-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1">
+            <Plus size={13} /> Nuevo
           </Link>
-          <button onClick={() => signOut({ callbackUrl: "/login" })} className="text-slate-400 text-xs">
-            ⎋
+          <button onClick={() => signOut({ callbackUrl: "/login" })} className="text-slate-400">
+            <LogOut size={15} />
           </button>
         </div>
       </header>
@@ -95,6 +97,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-slate-900 border-t border-slate-800 flex">
         {navItems.map((item) => {
           const active = pathname.startsWith(item.href);
+          const Icon = item.icon;
           return (
             <Link
               key={item.href}
@@ -103,7 +106,7 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
                 active ? "text-indigo-400" : "text-slate-500"
               }`}
             >
-              <span className="text-lg">{item.icon}</span>
+              <Icon size={20} />
               {item.label}
             </Link>
           );

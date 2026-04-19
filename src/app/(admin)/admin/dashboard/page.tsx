@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { Layers, CheckCircle, XCircle, Users, Plus, UserPlus } from "lucide-react";
 
 export default async function DashboardPage() {
   const [profiles, users] = await Promise.all([
@@ -14,10 +15,10 @@ export default async function DashboardPage() {
   const counts = Object.fromEntries(byType.map((b) => [b.type, b._count]));
 
   const stats = [
-    { label: "Perfiles totales", value: total, icon: "◈", color: "bg-indigo-50 text-indigo-600" },
-    { label: "Activos", value: active, icon: "●", color: "bg-emerald-50 text-emerald-600" },
-    { label: "Usuarios", value: users, icon: "◉", color: "bg-purple-50 text-purple-600" },
-    { label: "Inactivos", value: total - active, icon: "○", color: "bg-gray-50 text-gray-500" },
+    { label: "Perfiles totales", value: total, Icon: Layers, color: "bg-indigo-50 text-indigo-600" },
+    { label: "Activos", value: active, Icon: CheckCircle, color: "bg-emerald-50 text-emerald-600" },
+    { label: "Usuarios", value: users, Icon: Users, color: "bg-purple-50 text-purple-600" },
+    { label: "Inactivos", value: total - active, Icon: XCircle, color: "bg-gray-50 text-gray-500" },
   ];
 
   const typeStats = [
@@ -37,8 +38,8 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
         {stats.map((s) => (
           <div key={s.label} className="card p-5 flex items-center gap-4">
-            <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center text-xl font-bold shrink-0`}>
-              {s.icon}
+            <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center shrink-0`}>
+              <s.Icon size={20} />
             </div>
             <div>
               <p className="text-2xl font-bold text-gray-900">{s.value}</p>
@@ -62,8 +63,8 @@ export default async function DashboardPage() {
       {/* Accesos rápidos */}
       <div className="grid grid-cols-2 gap-4">
         <Link href="/admin/new" className="card p-5 flex items-center gap-4 hover:shadow-md transition group">
-          <div className="w-10 h-10 rounded-xl bg-gray-900 text-white flex items-center justify-center text-xl shrink-0 group-hover:bg-indigo-600 transition">
-            +
+          <div className="w-10 h-10 rounded-xl bg-gray-900 text-white flex items-center justify-center shrink-0 group-hover:bg-indigo-600 transition">
+            <Plus size={20} />
           </div>
           <div>
             <p className="font-semibold text-gray-900">Nuevo perfil</p>
@@ -71,8 +72,8 @@ export default async function DashboardPage() {
           </div>
         </Link>
         <Link href="/admin/users/new" className="card p-5 flex items-center gap-4 hover:shadow-md transition group">
-          <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-purple-100 group-hover:text-purple-600 transition">
-            ◉
+          <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center shrink-0 group-hover:bg-purple-100 group-hover:text-purple-600 transition">
+            <UserPlus size={20} />
           </div>
           <div>
             <p className="font-semibold text-gray-900">Nuevo usuario</p>
