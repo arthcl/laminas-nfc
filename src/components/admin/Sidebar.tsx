@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { LayoutDashboard, Layers, Users, Plus, LogOut } from "lucide-react";
+import { LayoutDashboard, Layers, Users, Plus, LogOut, Settings } from "lucide-react";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -67,13 +67,26 @@ export default function Sidebar({ userName }: { userName?: string | null }) {
             </div>
             <span className="text-slate-300 text-xs truncate">{userName ?? "Admin"}</span>
           </div>
-          <button
-            onClick={() => signOut({ callbackUrl: "/login" })}
-            className="text-slate-500 hover:text-white transition ml-2 shrink-0"
-            title="Cerrar sesión"
-          >
-            <LogOut size={15} />
-          </button>
+          <div className="flex items-center gap-1 shrink-0 ml-2">
+            <Link
+              href="/admin/settings"
+              title="Mi cuenta"
+              className={`p-1.5 rounded-lg transition ${
+                pathname === "/admin/settings"
+                  ? "text-white bg-slate-700"
+                  : "text-slate-500 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <Settings size={14} />
+            </Link>
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="p-1.5 rounded-lg text-slate-500 hover:text-white hover:bg-slate-800 transition"
+              title="Cerrar sesión"
+            >
+              <LogOut size={14} />
+            </button>
+          </div>
         </div>
       </aside>
 

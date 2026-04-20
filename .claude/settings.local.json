@@ -19,7 +19,8 @@
       "Bash(npx vercel *)",
       "Bash(mkdir -p \"/c/Users/arthc/Escritorio/lab/proyectos/laminas-nfc/src/app/\\(admin\\)/admin/profiles/[id]/success\")",
       "Bash(mkdir -p \"/c/Users/arthc/Escritorio/lab/proyectos/laminas-nfc/src/app/\\(admin\\)/admin/profiles/[id]/edit\")",
-      "Bash(mkdir -p \"/c/Users/arthc/Escritorio/lab/proyectos/laminas-nfc/src/app/api/profiles/[id]\")"
+      "Bash(mkdir -p \"/c/Users/arthc/Escritorio/lab/proyectos/laminas-nfc/src/app/api/profiles/[id]\")",
+      "Bash(npx tsc *)"
     ]
   }
 }
