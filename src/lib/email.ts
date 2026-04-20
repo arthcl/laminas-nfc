@@ -1,6 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM = "Laminas NFC <laminas@arturdev.cl>";
 
 export async function sendWelcomeEmail({
@@ -12,6 +11,7 @@ export async function sendWelcomeEmail({
   email: string;
   password: string;
 }) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const baseUrl = process.env.NEXTAUTH_URL ?? "https://laminas.arturdev.cl";
   const loginUrl = `${baseUrl}/login`;
   const settingsUrl = `${baseUrl}/portal/settings`;
